@@ -2243,7 +2243,8 @@
    ═══════════════════════════════════════════════════════════ */
 var AFFILIATE = {
   VIATOR_PID:  'P00303641',
-  VIATOR_MCID: 'YOUR_VIATOR_MCID',  // ← paste your Viator mcid here (from your tracking link)
+  VIATOR_MCID: '42383',
+  VIATOR_CAMPAIGN: 'dragon-route-site',
   BOOKING_AID: 'YOUR_BOOKING_AID'   // ← paste your Booking.com affiliate ID here
 };
 
@@ -2256,6 +2257,9 @@ function injectAffiliateIds() {
     if (href.indexOf('viator.com') !== -1) {
       href = href.replace('VIATOR_PID', AFFILIATE.VIATOR_PID)
                  .replace('42383', AFFILIATE.VIATOR_MCID);
+      if (AFFILIATE.VIATOR_CAMPAIGN && href.indexOf('campaign=') === -1) {
+        href += (href.indexOf('?') === -1 ? '?' : '&') + 'campaign=' + encodeURIComponent(AFFILIATE.VIATOR_CAMPAIGN);
+      }
       a.setAttribute('href', href);
     }
     if (href.indexOf('booking.com') !== -1) {
